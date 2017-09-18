@@ -3,6 +3,7 @@ from heppy.particles.tlv.jet import Jet
 from heppy.particles.jet import JetConstituents
 from ROOT import TLorentzVector
 
+import math
 import itertools
 
 class JetCombinator(Analyzer):
@@ -35,13 +36,12 @@ class JetCombinator(Analyzer):
                 v += ptc.p4()
 
         ret = True
-
         if abs(jet.pt() - v.Pt())>tolerance:
             print 'pt unequal: ', jet.pt() - v.Pt()
             ret = False
 
-        if abs(jet.theta() - v.Theta()) > tolerance:
-            print 'theta unequal: ', jet.theta() - v.Theta()
+        if abs(jet.theta() - (math.pi/2 - v.Theta())) > tolerance:
+            print 'theta unequal: ', jet.theta(), ' ',  v.Theta()
             ret = False
 
         if abs(jet.eta() - v.Eta()) > tolerance:
@@ -65,12 +65,6 @@ class JetCombinator(Analyzer):
         jets = getattr(event, self.cfg_ana.input_jets)
 
         setattr(event, self.cfg_ana.n_jets, len(jets))
-        print jets
-        print len(jets)
-
-        for jet in jets:
-            temp = self.validateMomenta(jet)
-        return False
         if len(jets) < 4:
             return False
 
@@ -80,24 +74,18 @@ class JetCombinator(Analyzer):
             pairs = [(a, b) for a, b in itertools.combinations(jets, 2)]
             pairs.sort(key = lambda x: (x[0].p4() + x[1].p4())*(x[0].p4() + x[1].p4()))
 
-            for a, b in pairs:
-                print (a.p4()+b.p4())*(a.p4()+b.p4())
-            print '//////////////////'
             # combine jets
             jet_a, jet_b = pairs[0]
             print jet_a, jet_b
             newjet = Jet((jet_a.p4() + jet_b.p4()))
             newjet.constituents = self.merge_constituents([jet_a.constituents, jet_b.constituents])
             newjet.constituents.validate(newjet.e())
-            self.validateMomenta(newjet)
-            print newjet
+            assert(self.validateMomenta(newjet))
 
             jets.remove(jet_a)
             jets.remove(jet_b)
             jets.append(newjet)
             jets.sort(key = lambda x: x.m())
-            print(jets)
             
-        print ';;;;;;;;;;;;;\n\n'
         assert(len(jets)==4)
         setattr(event, self.cfg_ana.output_jets, jets)
