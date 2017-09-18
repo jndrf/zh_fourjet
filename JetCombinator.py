@@ -36,7 +36,7 @@ class JetCombinator(Analyzer):
 
         ret = True
 
-        if (jet.pt() - v.Pt())>tolerance:
+        if abs(jet.pt() - v.Pt())>tolerance:
             print 'pt unequal: ', jet.pt() - v.Pt()
             ret = False
 
@@ -67,6 +67,10 @@ class JetCombinator(Analyzer):
         setattr(event, self.cfg_ana.n_jets, len(jets))
         print jets
         print len(jets)
+
+        for jet in jets:
+            temp = self.validateMomenta(jet)
+        return False
         if len(jets) < 4:
             return False
 
