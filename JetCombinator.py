@@ -65,10 +65,17 @@ class JetCombinator(Analyzer):
         jets = getattr(event, self.cfg_ana.input_jets)
 
         setattr(event, self.cfg_ana.n_jets, len(jets))
-        if len(jets) < 4:
-            return False
 
+        # add empty if needed jets so that the analysis won't fail later on.
+        # doesn't work for now, thus aborting.
+        while len(jets) < 4:
+            print 'less than four jets, aborting'
+            return False
+            newjet = (Jet(TLorentzVector(10., 10., 10., 50.)))
+            newjet.constituents = JetConstituents()
+            jets.append(jets[0])
         
+        # reduce jet number to four
         while len(jets) > 4:
 
             pairs = [(a, b) for a, b in itertools.combinations(jets, 2)]
