@@ -2,6 +2,7 @@ from heppy.framework.analyzer import Analyzer
 import copy
 from numpy import array, linalg
 import math
+from random import gauss
 
 class JetEnergyComputer(Analyzer):
     '''Use the initial p4 to constrain the energy of the 4 jets,
@@ -73,7 +74,7 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
             return True
 
         # here solve the equation to get the energy scale factor for each jet.
-        scale_factors = self.getRescaleFactor(jets, self.cfg_ana.sqrts)
+        scale_factors = self.getRescaleFactor(jets, self.cfg_ana.sqrts*gauss(1, 0.0012)) # spread from arXiv:1605.00100v2
         output = []
         for jet, factor in zip(jets, scale_factors):
             # the jets should not be deepcopied
