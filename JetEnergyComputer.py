@@ -68,7 +68,7 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
     def process(self, event):
         setattr(event, self.cfg_ana.out_chi, 0)
         sqrts = self.cfg_ana.sqrts
-        jets = getattr(event, self.cfg_ana.input_jets)
+        jets = copy.deepcopy(getattr(event, self.cfg_ana.input_jets))
         if len(jets) != 4:
             setattr(event, self.cfg_ana.output_jets, [])
             setattr(event, self.cfg_ana.out_chi, -1)
