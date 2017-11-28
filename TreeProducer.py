@@ -53,7 +53,7 @@ class TreeProducer(Analyzer):
         bookJet(self.tree, 'rescaled_jet3', self.taggers)
         bookJet(self.tree, 'rescaled_jet4', self.taggers)
 
-        Bookparticle(self.tree, 'misenergy')
+        BookParticle(self.tree, 'misenergy')
         bookParticle(self.tree, 'higgs')
         bookParticle(self.tree, 'zed')
         bookLepton(self.tree, 'lepton1')
