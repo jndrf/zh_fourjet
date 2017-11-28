@@ -7,7 +7,7 @@ class RejectZLeptonic(Analyzer):
     
 
     def process(self, event):
-        jets = getattr(event, self.cfg_ana.input_jets)
+        jets = copy.deepcopy(getattr(event, self.cfg_ana.input_jets))
         charged_hadrons = [211]
         # if len(jets)==0:
         #     setattr(event, self.cfg_ana.output_jets, [])

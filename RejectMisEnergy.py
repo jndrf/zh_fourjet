@@ -9,7 +9,7 @@ import copy
 class RejectMisEnergy(Analyzer):
 
     def process(self, event):
-        jets = getattr(event, self.cfg_ana.input_jets)
+        jets = copy.deepcopy(getattr(event, self.cfg_ana.input_jets))
         # if len(jets)==0:
         #     setattr(event, self.cfg_ana.output_jets, [])
         #     setattr(event, self.cfg_ana.out_mass, -1)

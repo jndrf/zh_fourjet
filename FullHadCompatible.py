@@ -13,7 +13,7 @@ Rejects events that are compatible with a fully hadronic WW or ZZ decay
 
     def process(self, event):
         mass = {23:91, 24:80, 25:125}
-        jets = getattr(event, self.cfg_ana.input_jets)
+        jets = copy.deepcopy(getattr(event, self.cfg_ana.input_jets))
         if len(jets) < 4:
             setattr(event, self.cfg_ana.dWW, -1)
             setattr(event, self.cfg_ana.dZZ, -1)
