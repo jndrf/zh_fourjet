@@ -13,4 +13,5 @@ class AncestorSeeker(Analyzer):
                 for ancestor in ancestors:
                     if ancestor.pdgid()>=21 and ancestor.pdgid()<=37: #all gauge bosons, incl. bsm
                         jet.tags['ancestor'] = ancestor.pdgid()
+            print jet
 

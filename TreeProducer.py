@@ -23,10 +23,10 @@ class TreeProducer(Analyzer):
         bookJet(self.tree, 'cutjet3', self.taggers)
         bookJet(self.tree, 'cutjet4', self.taggers)
 
-        bookJet(self.tree, 'cutjet1', self.taggers)
-        bookJet(self.tree, 'cutjet2', self.taggers)
-        bookJet(self.tree, 'cutjet3', self.taggers)
-        bookJet(self.tree, 'cutjet4', self.taggers)
+        # bookJet(self.tree, 'cutjet1', self.taggers)
+        # bookJet(self.tree, 'cutjet2', self.taggers)
+        # bookJet(self.tree, 'cutjet3', self.taggers)
+        # bookJet(self.tree, 'cutjet4', self.taggers)
 
         bookJet(self.tree, 'leptonjet1', self.taggers)
         bookJet(self.tree, 'leptonjet2', self.taggers)
@@ -94,12 +94,12 @@ class TreeProducer(Analyzer):
                     jet, self.taggers)
 
 
-        cutjets = getattr(event, self.cfg_ana.cutjets)
-        for ijet, jet in enumerate(cutjets):
-            if ijet==4:
-                break
-            fillJet(self.tree, 'cutjet{ijet}'.format(ijet=ijet+1),
-                    jet, self.taggers)
+        # cutjets = getattr(event, self.cfg_ana.cutjets)
+        # for ijet, jet in enumerate(cutjets):
+        #     if ijet==4:
+        #         break
+        #     fillJet(self.tree, 'cutjet{ijet}'.format(ijet=ijet+1),
+        #             jet, self.taggers)
 
 
         leptonjets = getattr(event, self.cfg_ana.leptonjets)

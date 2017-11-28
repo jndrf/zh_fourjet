@@ -13,7 +13,10 @@ class MatchTransfer(Analyzer):
             for tag in gentags:
                 jet.tags[tag] = False
                 if jet.match:
-                    jet.tags[tag] = jet.match.tags[tag]
+                    try:
+                        jet.tags[tag] = jet.match.tags[tag]
+                    except:
+                        import pdb; pdb.set_trace()
 
             jet.tags['parton'] = 0
             if jet.match and jet.match.match:
