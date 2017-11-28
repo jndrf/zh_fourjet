@@ -31,7 +31,7 @@ class ZHReconstruction(Analyzer):
                 continue
             higgsmass = m12 + m34 - mass[23]
             try:
-                candlist.append([j1, j2, j3, j4, higgsmass, m12, m34, j1.match.tags['ancestor'], j2.match.tags['ancestor']])
+                candlist.append([j1, j2, j3, j4, higgsmass, m12, m34, j1.tags['ancestor'], j2.tags['ancestor']])
             except AttributeError:
                 candlist.append([j1, j2, j3, j4, higgsmass, m12, m34, 0, 0])
 
