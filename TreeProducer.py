@@ -13,30 +13,30 @@ class TreeProducer(Analyzer):
                               'recreate')
         self.tree = Tree( 'events', '')
         self.taggers = ['b', 'tageff', 'higgsmaker', 'matched', 'dr', 'n_constituents', 'n_charged_hadrons', 'ancestor', 'parton', 'res', 'higgs_from_pair', 'raw_e', 'raw_res' ]
-        # bookJet(self.tree, 'rawjet1', self.taggers)
-        # bookJet(self.tree, 'rawjet2', self.taggers)
-        # bookJet(self.tree, 'rawjet3', self.taggers)
-        # bookJet(self.tree, 'rawjet4', self.taggers)
+        bookJet(self.tree, 'rawjet1', self.taggers)
+        bookJet(self.tree, 'rawjet2', self.taggers)
+        bookJet(self.tree, 'rawjet3', self.taggers)
+        bookJet(self.tree, 'rawjet4', self.taggers)
 
-        # bookJet(self.tree, 'cutjet1', self.taggers)
-        # bookJet(self.tree, 'cutjet2', self.taggers)
-        # bookJet(self.tree, 'cutjet3', self.taggers)
-        # bookJet(self.tree, 'cutjet4', self.taggers)
+        bookJet(self.tree, 'cutjet1', self.taggers)
+        bookJet(self.tree, 'cutjet2', self.taggers)
+        bookJet(self.tree, 'cutjet3', self.taggers)
+        bookJet(self.tree, 'cutjet4', self.taggers)
 
-        # bookJet(self.tree, 'cutjet1', self.taggers)
-        # bookJet(self.tree, 'cutjet2', self.taggers)
-        # bookJet(self.tree, 'cutjet3', self.taggers)
-        # bookJet(self.tree, 'cutjet4', self.taggers)
+        bookJet(self.tree, 'cutjet1', self.taggers)
+        bookJet(self.tree, 'cutjet2', self.taggers)
+        bookJet(self.tree, 'cutjet3', self.taggers)
+        bookJet(self.tree, 'cutjet4', self.taggers)
 
-        # bookJet(self.tree, 'leptonjet1', self.taggers)
-        # bookJet(self.tree, 'leptonjet2', self.taggers)
-        # bookJet(self.tree, 'leptonjet3', self.taggers)
-        # bookJet(self.tree, 'leptonjet4', self.taggers)
+        bookJet(self.tree, 'leptonjet1', self.taggers)
+        bookJet(self.tree, 'leptonjet2', self.taggers)
+        bookJet(self.tree, 'leptonjet3', self.taggers)
+        bookJet(self.tree, 'leptonjet4', self.taggers)
 
-        # bookJet(self.tree, 'massjet1', self.taggers)
-        # bookJet(self.tree, 'massjet2', self.taggers)
-        # bookJet(self.tree, 'massjet3', self.taggers)
-        # bookJet(self.tree, 'massjet4', self.taggers)
+        bookJet(self.tree, 'massjet1', self.taggers)
+        bookJet(self.tree, 'massjet2', self.taggers)
+        bookJet(self.tree, 'massjet3', self.taggers)
+        bookJet(self.tree, 'massjet4', self.taggers)
 
         bookJet(self.tree, 'hadjet1', self.taggers)
         bookJet(self.tree, 'hadjet2', self.taggers)
@@ -48,12 +48,12 @@ class TreeProducer(Analyzer):
         bookJet(self.tree, 'genjet3', self.taggers)
         bookJet(self.tree, 'genjet4', self.taggers)
 
-        # bookJet(self.tree, 'rescaled_jet1', self.taggers)
-        # bookJet(self.tree, 'rescaled_jet2', self.taggers)
-        # bookJet(self.tree, 'rescaled_jet3', self.taggers)
-        # bookJet(self.tree, 'rescaled_jet4', self.taggers)
+        bookJet(self.tree, 'rescaled_jet1', self.taggers)
+        bookJet(self.tree, 'rescaled_jet2', self.taggers)
+        bookJet(self.tree, 'rescaled_jet3', self.taggers)
+        bookJet(self.tree, 'rescaled_jet4', self.taggers)
 
-        bookParticle(self.tree, 'misenergy')
+        Bookparticle(self.tree, 'misenergy')
         bookParticle(self.tree, 'higgs')
         bookParticle(self.tree, 'zed')
         bookLepton(self.tree, 'lepton1')
@@ -86,36 +86,36 @@ class TreeProducer(Analyzer):
         misenergy = getattr(event, self.cfg_ana.misenergy)
         fillParticle(self.tree, 'misenergy', misenergy )        
 
-        # rawjets = getattr(event, self.cfg_ana.rawjets)
-        # for ijet, jet in enumerate(rawjets):
-        #     if ijet==4:
-        #         break
-        #     fillJet(self.tree, 'rawjet{ijet}'.format(ijet=ijet+1),
-        #             jet, self.taggers)
+        rawjets = getattr(event, self.cfg_ana.rawjets)
+        for ijet, jet in enumerate(rawjets):
+            if ijet==4:
+                break
+            fillJet(self.tree, 'rawjet{ijet}'.format(ijet=ijet+1),
+                    jet, self.taggers)
 
 
-        # cutjets = getattr(event, self.cfg_ana.cutjets)
-        # for ijet, jet in enumerate(cutjets):
-        #     if ijet==4:
-        #         break
-        #     fillJet(self.tree, 'cutjet{ijet}'.format(ijet=ijet+1),
-        #             jet, self.taggers)
+        cutjets = getattr(event, self.cfg_ana.cutjets)
+        for ijet, jet in enumerate(cutjets):
+            if ijet==4:
+                break
+            fillJet(self.tree, 'cutjet{ijet}'.format(ijet=ijet+1),
+                    jet, self.taggers)
 
 
-        # leptonjets = getattr(event, self.cfg_ana.leptonjets)
-        # for ijet, jet in enumerate(leptonjets):
-        #     if ijet==4:
-        #         break
-        #     fillJet(self.tree, 'leptonjet{ijet}'.format(ijet=ijet+1),
-        #             jet, self.taggers)
+        leptonjets = getattr(event, self.cfg_ana.leptonjets)
+        for ijet, jet in enumerate(leptonjets):
+            if ijet==4:
+                break
+            fillJet(self.tree, 'leptonjet{ijet}'.format(ijet=ijet+1),
+                    jet, self.taggers)
 
 
-        # massjets = getattr(event, self.cfg_ana.massjets)
-        # for ijet, jet in enumerate(massjets):
-        #     if ijet==4:
-        #         break
-        #     fillJet(self.tree, 'massjet{ijet}'.format(ijet=ijet+1),
-        #             jet, self.taggers)
+        massjets = getattr(event, self.cfg_ana.massjets)
+        for ijet, jet in enumerate(massjets):
+            if ijet==4:
+                break
+            fillJet(self.tree, 'massjet{ijet}'.format(ijet=ijet+1),
+                    jet, self.taggers)
 
 
         hadjets = getattr(event, self.cfg_ana.hadjets)
@@ -132,12 +132,12 @@ class TreeProducer(Analyzer):
             fillJet(self.tree, 'genjet{ijet}'.format(ijet=ijet+1),
                     genjet, self.taggers)
 
-        # rejets = getattr(event, self.cfg_ana.rejets)
-        # for ijet, rejet in enumerate(rejets):
-        #     if ijet==4:
-        #         break
-        #     fillJet(self.tree, 'rescaled_jet{ijet}'.format(ijet=ijet+1),
-        #             rejet, self.taggers)
+        rejets = getattr(event, self.cfg_ana.rejets)
+        for ijet, rejet in enumerate(rejets):
+            if ijet==4:
+                break
+            fillJet(self.tree, 'rescaled_jet{ijet}'.format(ijet=ijet+1),
+                    rejet, self.taggers)
 
         higgs = getattr(event, self.cfg_ana.higgs)
         try:
