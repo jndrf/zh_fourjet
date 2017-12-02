@@ -66,7 +66,6 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
         return chi2
 
     def process(self, event):
-        setattr(event, self.cfg_ana.out_chi, 0)
         sqrts = self.cfg_ana.sqrts
         jets = copy.deepcopy(getattr(event, self.cfg_ana.input_jets))
         if len(jets) != 4:
@@ -83,10 +82,9 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
             # in particular a list of consistuent particles 
             scaled_jet = copy.copy(jet)
             scaled_jet.tags['raw_e'] = jet.e()
-            scaled_jet._tlv = copy.deepcopy(jet._tlv) # deepcobying is done anyways, no need to do it again.
-            # scaled_jet._tlv *= factor
-            if scaled_jet.e()<0:
-                break
+            # scaled_jet._tlv = copy.deepcopy(jet._tlv) # deepcobying is done anyways, no need to do it again.
+            scaled_jet._tlv *= factor
+#            if scaled_jet.e()<0: break
             output.append(scaled_jet)
             
         # px = 0
@@ -98,6 +96,7 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
         #     pz += j._tlv.Pz()
 
         
+        setattr(event, self.cfg_ana.out_chi, 0)
         # if len(output) != 4:
         #     setattr(event, self.cfg_ana.output_jets, [])
         #     return True
@@ -110,4 +109,4 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
         for jet in output:
             if jet.e()<0:
                 setattr(event, self.cfg_ana.out_chi, -2)
-                return False
+                return True
