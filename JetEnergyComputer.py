@@ -110,3 +110,5 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
             if jet.e()<0:
                 setattr(event, self.cfg_ana.out_chi, -2)
                 return True
+            elif jet.e()==0:
+                return False
