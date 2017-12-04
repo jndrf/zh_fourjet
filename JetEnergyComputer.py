@@ -107,8 +107,10 @@ for method see Future_Colliders_2_2016.pdf, Slide 7.
         '''
         setattr(event, self.cfg_ana.output_jets, output)
         for jet in output:
+            if jet.e() == 0:
+                return False
+            
+        for jet in output:
             if jet.e()<0:
                 setattr(event, self.cfg_ana.out_chi, -2)
                 return True
-            elif jet.e()==0:
-                return False

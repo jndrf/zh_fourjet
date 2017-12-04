@@ -69,6 +69,7 @@ class TreeProducer(Analyzer):
         var(self.tree, 'n_leptons') 
         var(self.tree, 'n_candidates')
         var(self.tree, 'higgsmass') #Higgsmasse nach der Formel aus dem Paper
+        var(self.tree, 'n_iso_leptons')
 
         var(self.tree, 'vismass')
         var(self.tree, 'chi2')
@@ -175,6 +176,7 @@ class TreeProducer(Analyzer):
         fill( self.tree, 'n_genjets', getattr(event, self.cfg_ana.ngenjets))
         fill( self.tree, 'n_leptons', len(leptons) )
         fill( self.tree, 'n_candidates', getattr(event, self.cfg_ana.numberOfCandidates))
+        fill( self.tree, 'n_iso_leptons', len(event.sel_iso_leptons))
 
         fill(self.tree, 'vismass', getattr(event, self.cfg_ana.vismass))
         fill(self.tree, 'chi2', getattr(event, self.cfg_ana.chi2))
