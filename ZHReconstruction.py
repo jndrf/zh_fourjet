@@ -89,9 +89,9 @@ class ZHReconstruction(Analyzer):
             return True
         try:
             higgs, zed = self.findHiggsPair(jets)
-        except IndexError:
-            print 'teilchen kapott :('
-            print jets
+        except IndexError:      # Couldn't find the jets from Higgs or Z at truth level
+            # print 'teilchen kapott :('
+            # print jets
             higgs = None
             zed = None
         higgsmass = candjets[4]
